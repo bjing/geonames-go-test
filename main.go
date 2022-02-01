@@ -33,23 +33,30 @@ type Location struct {
 } 
 
 func fromStringToInt(s string) int {
-  res, err := strconv.Atoi(s)
-  if err != nil {
-    fmt.Println(err)
-    os.Exit(2)
-  }
+  if s == "" {
+    return 0
+  } else {
+    res, err := strconv.Atoi(s)
+    if err != nil {
+      fmt.Println(err)
+      os.Exit(2)
+    }
 
-  return res
+    return res
+  }
 }
 
 func fromStringToFloat(s string) float64 {
-  res, err := strconv.ParseFloat(s, 64)
-  if err != nil {
-    fmt.Println(err)
-    os.Exit(2)
+  if s == "" {
+    return 0.0
+  } else {
+    res, err := strconv.ParseFloat(s, 64)
+    if err != nil {
+      fmt.Println(err)
+      os.Exit(2)
+    }
+    return res
   }
-
-  return res
 }
 
 func main() {
@@ -110,9 +117,8 @@ func main() {
       msg := file.Name() + " is not a data file" 
       fmt.Println(msg)
     }
-    fmt.Printf("Total number of locations: %d", len(allLocations))
-    fmt.Println("First location: ")
-    fmt.Println(allLocations[0])
+    fmt.Println("Total number of locations: ", len(allLocations))
+    fmt.Println("First location: ", allLocations[0])
   }
 }
 
