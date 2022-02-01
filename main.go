@@ -58,6 +58,8 @@ func main() {
     log.Fatal(err)
   }
 
+  
+  allLocations := []Location{}
   for _, file := range files {
     fmt.Println("Processing file " + file.Name())
 
@@ -78,8 +80,6 @@ func main() {
         log.Fatal(err)
       }
 
-
-      locations := []Location{}
       for _, record := range records {
         location := Location {
           geonameid        : fromStringToInt(record[0]), 
@@ -103,14 +103,16 @@ func main() {
           modificationDate : record[18], 
         }
 
-        locations = append(locations, location)
+        allLocations = append(allLocations, location)
       }
-      fmt.Println(locations[0])
       fmt.Println()
     } else {
       msg := file.Name() + " is not a data file" 
       fmt.Println(msg)
     }
+    fmt.Printf("Total number of locations: %d", len(allLocations))
+    fmt.Println("First location: ")
+    fmt.Println(allLocations[0])
   }
 }
 
